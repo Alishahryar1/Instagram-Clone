@@ -1,0 +1,73 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+#  cloud:
+#    gateway:
+#      routes:
+#      - id: feedgramauth
+#        uri: lb://feedgramauth
+#        predicates:
+#          - Path=/*
+#      discovery:
+#        locator:
+#          enabled: true
+#  main:
+#    web-application-type: reactive
+#    allow-bean-definition-overriding: true
+
+server:
+  port: 8762
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+
+#zuul:
+#  ignored-services: '*'
+#  routes:
+#    feedgram-auth:
+#      path: /auth/**
+#      service-id: FEEDGRAM-AUTH
+#      sensitive-headers: Cookie,Set-Cookie
+#    feedgram-post:
+#      path: /post/**
+#      service-id: feedgram-post
+#      sensitive-headers: Cookie,Set-Cookie
+#    feedgram-graph:
+#      path: /graph/**
+#      service-id: feedgram-graph
+#      sensitive-headers: Cookie,Set-Cookie
+
+#ribbon:
+#  ConnectTimeout: 60000
+#  ReadTimeout: 600000
+
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 600000
+
+#management:
+#   endpoint:
+#      gateway:
+#         enabled: true
+
+security:
+  basic:
+    enable: false
+
+  jwt:
+    uri: /auth/**
+    header: Authorization
+    prefix: Bearer
+    expiration: 86400
+    secret: davidtilserfeedgramsecrettokenBvPHGM8C0ia4uOuxxqPD5DTbWC9F9TWvPStp3pb7ARo0oK2mJ3pd3YG4lxA9i8bj6OTbadwezxgeEByY
