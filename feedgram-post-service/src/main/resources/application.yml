@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: post-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/feedgram
+    username: postgres
+    password: tilser
+
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+          configuration:
+            key:
+              serializer: org.apache.kafka.common.serialization.StringSerializer
+      bindings:
+        feedgramUserChanged:
+          destination: feedgram.post.changed
+          contentType: application/json
+
+server:
+  port: 8001
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+
+security:
+  jwt:
+    uri: /post/**
+    header: Authorization
+    prefix: Bearer
+    expiration: 86400
+    secret: davidtilserfeedgramsecrettokenBvPHGM8C0ia4uOuxxqPD5DTbWC9F9TWvPStp3pb7ARo0oK2mJ3pd3YG4lxA9i8bj6OTbadwezxgeEByY
